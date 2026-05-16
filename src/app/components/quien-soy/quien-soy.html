@@ -1,1 +1,10 @@
-<p>quien-soy works!</p>
+ @if(this.githubService.usuarioGithub()){
+  <div class="github-info">
+    <p class="name">{{this.githubService.usuarioGithub().name}}</p>
+    <img [src]="this.githubService.usuarioGithub().avatar_url" alt="">
+    <p class="blog">{{this.githubService.usuarioGithub().blog}}</p>
+  </div>
+ }
+
+ <!-- Explicar de forma clara la elección del juego propio y cómo jugarlo. -->
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet iusto veritatis optio at. Facere, quisquam labore! Optio quas soluta inventore magnam reiciendis iure porro totam blanditiis tempora maxime excepturi, similique eius, tempore facilis hic minima. Amet totam debitis quos inventore, in deserunt laboriosam error vitae quam doloribus aliquam suscipit iure.</p>
