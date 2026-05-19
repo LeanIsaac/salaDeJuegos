@@ -14,9 +14,9 @@ export class ApiGithub {
   getUserGithub(){
     const peticion = this.httpClient.get(this.apiGithub+this.usuario);
 
-    const suscripcion =peticion.subscribe((data) => {
+    const suscripcion = peticion.subscribe((data) => {
       if(data){
-        console.log(data);
+        // console.log(data);
         this.usuarioGithub.set(data);
       }
       suscripcion.unsubscribe();
