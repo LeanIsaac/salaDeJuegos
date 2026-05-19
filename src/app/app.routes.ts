@@ -7,5 +7,6 @@ export const routes: Routes = [
   { path: 'login', loadComponent: () => import('./components/login/login').then(archivo => archivo.Login) },
   { path: 'registro', loadComponent: () => import('./components/registro/registro').then(archivo => archivo.Registro) },
   { path: 'quienSoy', loadComponent: () => import('./components/quien-soy/quien-soy').then(archivo => archivo.QuienSoy) },
+  { path: '**', redirectTo: 'home' },
 
 ];
