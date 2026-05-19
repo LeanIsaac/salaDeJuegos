@@ -4,9 +4,14 @@
     <span class="logo-text">Sala de <span>Juegos</span></span>
   </div>
   <nav>
+    @if (this.authService.usuarioActual()) {
+      <p>{{ this.authService.usuarioActual()?.user_metadata?.['nombre'] }}</p>
+      <button (click)="this.authService.cerrarSesion()">Cerrar sesión</button>
+    } @else {
+      <button routerLink="registro" routerLinkActive="active-link">Registro</button>
+      <button routerLink="login" routerLinkActive="active-link">Login</button>
+    }
     <button routerLink="home" routerLinkActive="active-link">Home</button>
-    <button routerLink="registro" routerLinkActive="active-link">Registro</button>
-    <button routerLink="login" routerLinkActive="active-link">Login</button>
     <button routerLink="quienSoy" routerLinkActive="active-link">Quién Soy</button>
   </nav>
 </header>
