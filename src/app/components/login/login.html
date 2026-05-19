@@ -1,1 +1,48 @@
-<p>login works!</p>
+<div class="page">
+  <div class="card">
+    <div class="tag">Acceso</div>
+    <h1>Iniciar Sesión</h1>
+    <p class="subtitle">// Ingresá tus credenciales para continuar</p>
+
+    <form [formGroup]="formulario" (ngSubmit)="accion()">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="tu@email.com">
+      </div>
+
+      <div class="field">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" placeholder="••••••••">
+      </div>
+
+      <button [disabled]="!formulario.valid" type="submit">▶ Ingresar</button>
+    </form>
+
+    <p class="link">¿No tenés cuenta? <a routerLink="/registro">Registrate</a></p>
+    <br>
+    <p class="title-acceso-rapido">Acceso rápido</p>
+
+    <div class="btn-users-acceso-container">
+
+      <button
+        type="button"
+        class="btn-users-acceso"
+        (click)="inicioRapido('user1')">
+        User1
+      </button>
+
+      <button
+        type="button"
+        class="btn-users-acceso"
+        (click)="inicioRapido('user2')">
+        User2
+      </button>
+
+      <button
+        type="button"
+        class="btn-users-acceso"
+        (click)="inicioRapido('user3')">
+        User3
+      </button>
+  </div>
+</div>
