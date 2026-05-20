@@ -3,6 +3,7 @@ import { createClient, AuthResponse, User, UserResponse, SupabaseClient } from '
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environments';
 import { Iregistro, Ilogin } from '../models/auth.interface';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class AuthService {
       if(!user){
         this.router.navigateByUrl('');
       }
- 
+
       if(user){ // Si hay usuario, redirigir a la página principal
         this.router.navigateByUrl('');
       }
@@ -46,7 +47,10 @@ export class AuthService {
       }
     });
     if (response.error) {
-      console.log(response.error);
+      //console.log(response.error);
+      if(response.error.message === 'User already registered'){
+        this.mostrarAlertaError('Registro Fallido', 'El usuario ya se encuentra registrado.');
+      }
     } else {
       console.log(response.data);
       this.usuarioActual.set(response.data.user);
@@ -63,9 +67,13 @@ export class AuthService {
 
     if (response.error) {
       console.log(response.error);
+      this.mostrarAlertaError('Login Fallido', response.error.message);
+      //mostrar el error en concreto
+      console.log(response.error.message);
     } else {
       console.log(response.data);
       this.usuarioActual.set(response.data.user);
+      this.mostrarAlertaExito('Login Exitoso', 'Has iniciado sesión correctamente');
       this.router.navigateByUrl('/auth');
     }
   }
@@ -75,7 +83,37 @@ export class AuthService {
   cerrarSesion(){
     this.supabase?.auth.signOut()
     this.usuarioActual.set(null);
+    this.mostrarAlertaExito('Sesión cerrada', 'Has cerrado sesión correctamente');
     this.router.navigateByUrl('/auth/login');
+  }
+
+  private mostrarAlertaError(titulo: string, mensaje: string) {
+    Swal.fire({
+      title: titulo,
+      background: '#1e1e1e',
+      color: '#fff',
+      text: mensaje,
+      icon: 'error',
+      timer: 2000,
+      confirmButtonText: 'Entendido',
+      confirmButtonColor: '#dc3545',
+      heightAuto: false
+    });
+  }
+
+  private mostrarAlertaExito(titulo: string, mensaje: string) {
+    Swal.fire({
+      position: "top-end",
+      background: '#1e1e1e',
+      color: '#fff',
+      toast: true,
+      timerProgressBar: true,
+      icon: "success",
+      title: titulo,
+      text: mensaje,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 
 }
