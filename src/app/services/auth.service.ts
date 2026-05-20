@@ -54,7 +54,7 @@ export class AuthService {
     } else {
       console.log(response.data);
       this.usuarioActual.set(response.data.user);
-      this.router.navigateByUrl('/auth');
+      this.router.navigateByUrl('');
     }
   }
 
@@ -74,7 +74,7 @@ export class AuthService {
       console.log(response.data);
       this.usuarioActual.set(response.data.user);
       this.mostrarAlertaExito('Login Exitoso', 'Has iniciado sesión correctamente');
-      this.router.navigateByUrl('/auth');
+      this.router.navigateByUrl('');
     }
   }
 
@@ -84,7 +84,7 @@ export class AuthService {
     this.supabase?.auth.signOut()
     this.usuarioActual.set(null);
     this.mostrarAlertaExito('Sesión cerrada', 'Has cerrado sesión correctamente');
-    this.router.navigateByUrl('/auth/login');
+    this.router.navigateByUrl('/login');
   }
 
   private mostrarAlertaError(titulo: string, mensaje: string) {
