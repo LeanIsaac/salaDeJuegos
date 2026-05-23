@@ -1,5 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { IUserGithub } from '../models/github.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ export class ApiGithub {
 
   usuario = 'leanIsaac';
   apiGithub = 'https://api.github.com/users/';
-  usuarioGithub = signal<any | null>(null);
+  usuarioGithub = signal<IUserGithub | null>(null);
 
   getUserGithub(){
     const peticion = this.httpClient.get(this.apiGithub+this.usuario);
@@ -17,7 +18,7 @@ export class ApiGithub {
     const suscripcion = peticion.subscribe((data) => {
       if(data){
         // console.log(data);
-        this.usuarioGithub.set(data);
+        this.usuarioGithub.set(data as IUserGithub);
       }
       suscripcion.unsubscribe();
     });
