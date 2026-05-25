@@ -19,8 +19,8 @@ export class AuthService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
 
     this.supabase.auth.onAuthStateChange((event, session) =>{
-      const user = session?.user;
-      this.usuarioActual.set(user ?? null);
+      const user = session?.user; // Obtener el usuario actual
+      this.usuarioActual.set(user ?? null); // Establecer el usuario actual
 
       if(!user){
         this.router.navigateByUrl('');
@@ -46,16 +46,40 @@ export class AuthService {
         }
       }
     });
+
     if (response.error) {
       //console.log(response.error);
       if(response.error.message === 'User already registered'){
         this.mostrarAlertaError('Registro Fallido', 'El usuario ya se encuentra registrado.');
+      } else {
+        this.mostrarAlertaError('Registro Fallido', response.error.message);
       }
-    } else {
-      console.log(response.data);
-      this.usuarioActual.set(response.data.user);
-      this.router.navigateByUrl('');
+      return; // corto la ejecucion si hubo un error en auth
     }
+
+    const usuarioAutenticado = response.data.user;
+
+    if (usuarioAutenticado) {
+      const { error: insertError } = await this.supabase
+        .from('usuarios')
+        .insert({
+          id: usuarioAutenticado.id, // <-- Uso el UUID generado por Auth
+          email: data.email,
+          nombre: data.nombre,
+          apellido: data.apellido,
+          edad: data.edad
+        });
+
+      if (insertError) {
+        console.error('Error al guardar datos públicos:', insertError.message);
+        this.mostrarAlertaError('Error de perfil', 'Te registraste pero no se pudo crear tu perfil público.');
+        return;
+      }
+    }
+    // Si todo salió bien, actualizo el estado y redirijo
+    console.log(response.data);
+    this.usuarioActual.set(response.data.user);
+    this.router.navigateByUrl('');
   }
 
   async loguear({email, password}: Ilogin) :Promise<void>{
@@ -84,7 +108,7 @@ export class AuthService {
     this.supabase?.auth.signOut()
     this.usuarioActual.set(null);
     this.mostrarAlertaExito('Sesión cerrada', 'Has cerrado sesión correctamente');
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('');
   }
 
   private mostrarAlertaError(titulo: string, mensaje: string) {
