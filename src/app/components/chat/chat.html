@@ -1,0 +1,36 @@
+<div class="chat-container">
+
+  <div class="chat-header">
+    <div class="header-icon">💬</div>
+    <h2>// Chat Global</h2>
+    <div class="online-dot"></div>
+  </div>
+
+  <div class="chat-body">
+    @for (msg of chatService.mensajes(); track msg.id) {
+      <div class="mensaje" [class.yo]="esElUsuarioActual(msg)" [class.otros]="!esElUsuarioActual(msg)">
+        <div class="meta">
+          @if (!esElUsuarioActual(msg)) {
+            <span class="nombre">{{ msg.usuarios?.nombre }}</span>
+          }
+          @else {
+            <span class="nombre">Yo</span>
+          }
+          <span class="hora">{{ msg.created_at | date:'HH:mm' }}</span>
+        </div>
+        <div class="burbuja">
+          <span class="contenido">{{ msg.contenido }}</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="chat-footer">
+    <input
+      [(ngModel)]="contenido"
+      (keyup.enter)="enviarMensaje()"
+      placeholder="Escribí un mensaje..." />
+    <button (click)="enviarMensaje()">▶ Enviar</button>
+  </div>
+
+</div>
