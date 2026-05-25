@@ -7,6 +7,7 @@
 
     @if (this.authService.usuarioActual()) {
       <p class="user-name">▶ {{ this.authService.usuarioActual()?.user_metadata?.['nombre'] }}</p>
+      <button routerLink="chat" routerLinkActive="active-link">Chat</button>
       <button (click)="this.authService.cerrarSesion()">Cerrar sesión</button>
     } @else {
       <button routerLink="" routerLinkActive="active-link">Home</button>
