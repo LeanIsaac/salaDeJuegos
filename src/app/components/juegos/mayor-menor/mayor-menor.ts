@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal} from '@angular/core';
-
+import { Component, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -16,6 +17,8 @@ export class MayorMenor implements OnInit{
   mensaje: string = '';
   juegoActivo: boolean = false;
   revelando = signal<boolean>(false);
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.reiniciarJuego();
@@ -66,5 +69,16 @@ export class MayorMenor implements OnInit{
     } else {
       this.juegoActivo = false;
     }
+  }
+
+  async salir(){
+    // Redirigir a la página de inicio
+    if(this.puntaje > 0){
+      await this.authService.guardarPuntaje('mayor-menor', this.puntaje);
+      //ir al home
+      this.router.navigate(['']);
+    }
+    // Redirigir a la página de inicio
+    this.router.navigate(['']);
   }
 }
