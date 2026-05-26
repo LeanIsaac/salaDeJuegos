@@ -111,6 +111,30 @@ export class AuthService {
     this.router.navigateByUrl('');
   }
 
+  async guardarPuntaje(juego: string, puntaje: number): Promise<void>{
+    if (!this.usuarioActual()) {
+      console.error('No hay usuario autenticado');
+      return;
+    }
+    if(puntaje <=0){
+      console.error('Puntaje inválido');
+      return;
+    }
+    // Guardar puntaje en la base de datos
+    const { error } = await this.supabase?.from('resultados_juegos').insert({
+      juego: juego,
+      puntaje: puntaje,
+      id_usuario: this.usuarioActual()?.id
+    });
+
+    if (error) {
+      console.error('Error al guardar puntaje:', error.message);
+      this.mostrarAlertaError('Error al guardar puntaje', error.message);
+    } else {
+      this.mostrarAlertaExito('Puntaje guardado', 'Tu puntaje ha sido guardado correctamente');
+    }
+  }
+
   private mostrarAlertaError(titulo: string, mensaje: string) {
     Swal.fire({
       title: titulo,
