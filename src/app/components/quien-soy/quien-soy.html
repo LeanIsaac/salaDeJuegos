@@ -6,25 +6,25 @@
 
       <div class="hero">
         <div class="avatar-frame">
-          <img class="avatar" [src]="githubService.usuarioGithub().avatar_url" alt="avatar">
+          <img class="avatar" [src]="githubService.usuarioGithub()?.avatar_url" alt="avatar">
         </div>
         <div class="info">
-          <p class="location">{{ githubService.usuarioGithub().location }}</p>
-          <h1 class="name">{{ githubService.usuarioGithub().name }}</h1>
-          <p class="handle">{{ githubService.usuarioGithub().blog }}</p>
+          <p class="location">{{ githubService.usuarioGithub()?.location }}</p>
+          <h1 class="name">{{ githubService.usuarioGithub()?.name }}</h1>
+          <p class="handle">{{ githubService.usuarioGithub()?.blog }}</p>
           <div class="stats">
             <div class="stat">
-              <div class="stat-num">{{ githubService.usuarioGithub().public_repos }}</div>
+              <div class="stat-num">{{ githubService.usuarioGithub()?.public_repos }}</div>
               <div class="stat-label">Repos Públicos</div>
             </div>
             <div class="stat-divider"></div>
             <div class="stat">
-              <div class="stat-num">{{ githubService.usuarioGithub().followers }}</div>
+              <div class="stat-num">{{ githubService.usuarioGithub()?.followers }}</div>
               <div class="stat-label">Seguidores</div>
             </div>
             <div class="stat-divider"></div>
             <div class="stat">
-              <div class="stat-num">{{ githubService.usuarioGithub().following }}</div>
+              <div class="stat-num">{{ githubService.usuarioGithub()?.following }}</div>
               <div class="stat-label">Siguiendo</div>
             </div>
           </div>

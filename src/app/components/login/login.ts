@@ -27,17 +27,17 @@ export class Login {
     switch(user) {
 
       case 'user1':
-        this.formulario.get('email')?.setValue('user@prueba.com');
+        this.formulario.get('email')?.setValue('dicarlo@prueba.com');
         this.formulario.get('password')?.setValue('qwerty');
         break;
 
       case 'user2':
-        this.formulario.get('email')?.setValue('mario@g.com');
+        this.formulario.get('email')?.setValue('mari@g.com');
         this.formulario.get('password')?.setValue('asdfgh');
         break;
 
       case 'user3':
-        this.formulario.get('email')?.setValue('mora@gmail.com');
+        this.formulario.get('email')?.setValue('mori@gmail.com');
         this.formulario.get('password')?.setValue('elmascrack');
         break;
     }

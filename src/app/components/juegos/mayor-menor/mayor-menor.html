@@ -1,1 +1,72 @@
-<p>mayor-menor works!</p>
+<div class="page">
+  <div class="inner">
+
+    <div class="header">
+      <div class="tag">Juego de cartas</div>
+      <h1>🃏 Mayor o Menor</h1>
+    </div>
+
+    <div class="puntaje-bar">
+      <span class="puntaje-label">Puntaje</span>
+      <span class="puntaje-num">{{ puntaje }}</span>
+    </div>
+
+    <div class="cartas-row">
+      <div class="carta carta-actual">
+        <span class="carta-valor">{{ cartaActual }}</span>
+      </div>
+      <span class="vs">VS</span>
+      <div class="carta carta-siguiente">
+        @if (this.revelando()) {
+          <span class="carta-valor">{{ cartaSiguiente }}</span>
+        } @else {
+          <span class="carta-valor">?</span>
+        }
+      </div>
+    </div>
+
+    <div class="btns">
+      <button class="btn-mayor" type="button" (click)="adivinarCarta('mayor')" [disabled]="!juegoActivo || revelando()">
+        ▲ Mayor
+      </button>
+      <button class="btn-menor" type="button" (click)="adivinarCarta('menor')" [disabled]="!juegoActivo || revelando()">
+        ▼ Menor
+      </button>
+    </div>
+
+    @if(mensaje) {
+      <div class="mensaje" [class.correcto]="juegoActivo" [class.incorrecto]="!juegoActivo">
+        {{ mensaje }}
+      </div>
+    }
+
+    <button type="button" class="btn-reiniciar" (click)="reiniciarJuego()">↺ Reiniciar</button>
+    <button type="button" class="btn-salir" (click)="salir()">Salir</button>
+
+  </div>
+</div>
+<!-- <div>
+  <h1>Mayor o Menor</h1>
+</div>
+<br>
+<p>puntaje: {{ puntaje }}</p>
+<div class="card">
+  <p>Carta Actual</p>
+  <div>
+    <h1>{{ cartaActual }}</h1>
+  </div>
+
+  <div>
+    <h1> ? </h1>
+  </div>
+</div>
+<br>
+<h2>¿La siguiente carta será mayor o menor?</h2>
+<div>
+  <button type="button" (click)="adivinarCarta('mayor')" [disabled]="!juegoActivo">mayor</button>
+  <button type="button" (click)="adivinarCarta('menor')" [disabled]="!juegoActivo">menor</button>
+</div>
+<div>
+  <h1>{{ mensaje }}</h1>
+</div>
+<button type="button" (click)="reiniciarJuego()">Reiniciar</button> -->
