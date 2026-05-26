@@ -1,6 +1,7 @@
 .page {
   padding: 2.5rem 2rem;
   min-height: 100vh;
+  width: 100%;
   position: relative;
   overflow: hidden;
 }
@@ -25,7 +26,7 @@
 
 .inner {
   position: relative; z-index: 1;
-  max-width: 700px; margin: 0 auto;
+  max-width: 800px; margin: 0 auto;
   display: flex; flex-direction: column;
   align-items: center; gap: 1.75rem;
 }
@@ -42,6 +43,18 @@
 
 h1 {
   font-size: 1.4rem; font-weight: 700; color: var(--text);
+}
+
+.puntajes {
+  display: flex; gap: 1rem;
+}
+
+.puntaje {
+  font-size: 1.2rem; font-weight: 600; color: var(--accent);
+}
+
+.mejor-puntaje {
+  font-size: 1.2rem; font-weight: 600; color: var(--accent);
 }
 
 /* IMAGEN */
@@ -147,3 +160,38 @@ h1 {
 }
 
 .btn-reiniciar:hover { border-color: var(--accent); color: var(--accent); }
+
+.botones-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-siguiente {
+  padding: 0.7rem 2rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; font-family: inherit;
+  transition: all 0.15s;
+  clip-path: polygon(6px 0%, 100% 0%, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0% 100%, 0% 6px);
+}
+
+.btn-siguiente:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-salir {
+  padding: 0.7rem 2rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; font-family: inherit;
+  transition: all 0.15s;
+  clip-path: polygon(6px 0%, 100% 0%, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0% 100%, 0% 6px);
+}
+
+.btn-salir:hover { border-color: var(--accent); color: red; }
+
