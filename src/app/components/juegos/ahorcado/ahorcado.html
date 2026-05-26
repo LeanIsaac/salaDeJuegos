@@ -4,6 +4,10 @@
     <div class="header">
       <div class="tag">Ahorcado</div>
       <h1>// Ahorcado</h1>
+      <div class="puntajes">
+        <div class="puntaje">Puntaje: {{ puntaje() }}</div>
+        <div class="mejor-puntaje">Mejor: {{ mejorPuntaje() }}</div>
+      </div>
     </div>
 
     <div class="img-frame">
@@ -43,7 +47,13 @@
       <div class="resultado-perdio">PERDISTE 💀 la palabra era {{ palabraActual() }}</div>
     }
 
-    <button type="button" class="btn-reiniciar" (click)="reiniciarJuego()">↺ Reiniciar</button>
+    <div class="botones-container">
+      <button type="button" class="btn-siguiente" (click)="siguientePalabra()">▶ Siguiente Palabra</button>
+      <button type="button" class="btn-reiniciar" (click)="reiniciarJuego()">↺ Reiniciar</button>
+      <div>
+        <button type="button" class="btn-salir" (click)="salir()">Salir</button>
+      </div>
+    </div>
 
   </div>
 </div>
