@@ -166,3 +166,17 @@ h1 { font-size: 1.4rem; font-weight: 700; color: var(--text); }
   clip-path: polygon(6px 0%, 100% 0%, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0% 100%, 0% 6px);
 }
 .btn-reiniciar:hover { border-color: var(--accent); color: var(--accent); }
+
+/* SALIR */
+.btn-salir {
+  padding: 0.65rem 2rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; font-family: inherit;
+  transition: all 0.15s;
+  clip-path: polygon(6px 0%, 100% 0%, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0% 100%, 0% 6px);
+}
+.btn-salir:hover { border-color: var(--accent); color: var(--red); }
