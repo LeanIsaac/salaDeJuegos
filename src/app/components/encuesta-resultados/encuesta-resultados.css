@@ -1,0 +1,159 @@
+:host { display: block; }
+
+.pagina {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.titulo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f0ece4;
+  margin: 0;
+}
+
+.badge-admin {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(201,168,76,0.15);
+  color: #c9a84c;
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.total {
+  font-size: 0.82rem;
+  color: #555;
+  margin: 0 0 1rem;
+}
+
+/* ── Tabla ──────────────────────────────────────────────── */
+.tabla-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+thead tr {
+  border-bottom: 1px solid #222;
+}
+
+th {
+  padding: 0 12px 10px 0;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #444;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+td {
+  padding: 11px 12px 11px 0;
+  color: #bbb;
+  vertical-align: middle;
+}
+
+/* ── Filas ──────────────────────────────────────────────── */
+.fila {
+  border-bottom: 1px solid #1c1c1c;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.fila:hover { background: rgba(255,255,255,0.025); }
+
+.fila.expandida {
+  background: rgba(201,168,76,0.05);
+  border-bottom: none;
+}
+
+/* ── Fila detalle ───────────────────────────────────────── */
+.fila-detalle td {
+  padding: 0 0 12px 0;
+  border-bottom: 1px solid #222;
+}
+
+.detalle {
+  background: #161616;
+  border-radius: 6px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.detalle-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #444;
+}
+
+.detalle-texto {
+  font-size: 0.88rem;
+  color: #ccc;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Columnas ───────────────────────────────────────────── */
+.col-num    { color: #333; font-size: 0.75rem; width: 28px; }
+.col-nombre { color: #e8e4dc; font-weight: 500; }
+.col-juegos { max-width: 180px; }
+.col-fecha  { color: #444; font-size: 0.8rem; white-space: nowrap; }
+.col-expand { color: #333; font-size: 0.65rem; text-align: right; padding-right: 0; }
+
+/* ── Chips ──────────────────────────────────────────────── */
+.chip {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+  background: #1e1e1e;
+  color: #666;
+  border: 1px solid #2a2a2a;
+}
+
+.chip-si  { background: rgba(39,174,96,0.12);  color: #4ecf85; border-color: rgba(39,174,96,0.2); }
+.chip-no  { background: rgba(192,57,43,0.12);  color: #d95555; border-color: rgba(192,57,43,0.2); }
+
+/* ── Estados ────────────────────────────────────────────── */
+.cargando {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #444;
+  font-size: 0.88rem;
+  padding: 2rem 0;
+}
+
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid #2a2a2a;
+  border-top-color: #c9a84c;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.vacio { font-size: 0.88rem; color: #444; font-style: italic; }
