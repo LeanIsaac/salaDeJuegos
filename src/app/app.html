@@ -6,9 +6,11 @@
   <nav>
 
     @if (this.authService.usuarioActual()) {
-      <p class="user-name">▶ {{ this.authService.usuarioActual()?.user_metadata?.['nombre'] }}</p>
+      <button routerLink="" routerLinkActive="active-link">Home</button>
+      <button routerLink="resultados" routerLinkActive="active-link">Resultados</button>
       <button routerLink="chat" routerLinkActive="active-link">Chat</button>
-      <button (click)="this.authService.cerrarSesion()">Cerrar sesión</button>
+      <p class="user-name">▶ {{ this.authService.usuarioActual()?.user_metadata?.['nombre'] }}</p>
+      <button class="btn-cerrarSesion" (click)="this.authService.cerrarSesion()">Cerrar sesión</button>
     } @else {
       <button routerLink="" routerLinkActive="active-link">Home</button>
       <button routerLink="login" routerLinkActive="active-link">Login</button>
