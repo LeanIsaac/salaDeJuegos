@@ -156,13 +156,6 @@ constructor() {
       res = 'empate';
     }
 
-    if (res === 'victoria' || res === 'blackjack') {
-      this.victorias.update(v => v + 1);
-      this.puntaje.update(p => p + (res === 'blackjack' ? 3 : 2));
-    } else if (res === 'empate') {
-      this.puntaje.update(p => p + 1);
-    }
-
     let ganado = 0;
 
     if (res === 'blackjack') ganado = 3;
@@ -172,7 +165,7 @@ constructor() {
     if (ganado > 0) {
       this.victorias.update(v => v + 1);
       this.puntaje.update(p => p + ganado);
-      this.puntajeTotal.update(p => p + ganado);  // ✅ acumula
+      this.puntajeTotal.update(p => p + ganado);
     }
 
     this.resultado.set(res);
