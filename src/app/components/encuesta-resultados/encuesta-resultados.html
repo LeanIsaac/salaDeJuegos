@@ -1,0 +1,74 @@
+<div class="pagina">
+
+  <div class="header">
+    <h1 class="titulo">Resultados de encuestas</h1>
+    <span class="badge-admin">Admin</span>
+  </div>
+
+  @if (cargando()) {
+    <div class="cargando">
+      <div class="spinner"></div>
+      <span>Cargando respuestas...</span>
+    </div>
+  }
+
+  @if (!cargando() && respuestas().length === 0) {
+    <p class="vacio">No hay encuestas respondidas todavía.</p>
+  }
+
+  @if (!cargando() && respuestas().length > 0) {
+    <p class="total">{{ respuestas().length }} respuesta{{ respuestas().length !== 1 ? 's' : '' }}</p>
+
+    <div class="tabla-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Teléfono</th>
+            <th>¿Le gustó?</th>
+            <th>Juegos</th>
+            <th>Fecha</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (r of respuestas(); track r.id; let i = $index) {
+            <tr
+              class="fila"
+              [class.expandida]="expandida() === r.id"
+              (click)="toggleExpandir(r.id)"
+            >
+              <td class="col-num">{{ i + 1 }}</td>
+              <td class="col-nombre">{{ r.nombre }} {{ r.apellido }}</td>
+              <td>{{ r.edad }}</td>
+              <td>{{ r.telefono }}</td>
+              <td>
+                <span class="chip" [class.chip-si]="r.pregunta1 === 'Si'" [class.chip-no]="r.pregunta1 === 'No'">
+                  {{ r.pregunta1 }}
+                </span>
+              </td>
+              <td class="col-juegos">{{ parsearJuegos(r.pregunta2) }}</td>
+              <td class="col-fecha">{{ formatearFecha(r.created_at) }}</td>
+              <td class="col-expand">{{ expandida() === r.id ? '▲' : '▼' }}</td>
+            </tr>
+
+            <!-- Fila expandida con sugerencia -->
+            @if (expandida() === r.id) {
+              <tr class="fila-detalle">
+                <td colspan="8">
+                  <div class="detalle">
+                    <span class="detalle-label">Sugerencia:</span>
+                    <p class="detalle-texto">{{ r.pregunta3 }}</p>
+                  </div>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+</div>

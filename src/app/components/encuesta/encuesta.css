@@ -1,0 +1,227 @@
+:host { display: block; }
+
+.pagina {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.titulo {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #f0ece4;
+  margin: 0 0 0.25rem;
+}
+
+.subtitulo {
+  font-size: 0.88rem;
+  color: #555;
+  margin: 0 0 2rem;
+}
+
+/* ── Secciones ──────────────────────────────────────────── */
+fieldset.seccion {
+  border: none;
+  border-top: 1px solid #222;
+  padding: 1.5rem 0;
+  margin: 0;
+}
+
+legend.seccion-titulo {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+/* clearfix para legend float */
+fieldset.seccion::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+.fila-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .fila-2 { grid-template-columns: 1fr; }
+  .check-grupo { grid-template-columns: 1fr; }
+}
+
+/* ── Campos ─────────────────────────────────────────────── */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+label {
+  font-size: 0.78rem;
+  color: #777;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  background: #181818;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  color: #e8e4dc;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.8rem;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus, textarea:focus { border-color: #444; }
+
+input.ng-touched.ng-invalid,
+textarea.ng-touched.ng-invalid {
+  border-color: #7a1f1f;
+}
+
+textarea { resize: vertical; min-height: 100px; }
+
+.error {
+  font-size: 0.74rem;
+  color: #d95555;
+  margin-top: 2px;
+}
+
+/* ── Radio ──────────────────────────────────────────────── */
+.radio-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: #aaa;
+}
+
+.radio-label input[type="radio"] { display: none; }
+
+.radio-custom {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #3a3a3a;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.15s;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom {
+  border-color: #c9a84c;
+}
+.radio-label input[type="radio"]:checked + .radio-custom::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: #c9a84c;
+}
+
+/* ── Checkboxes ─────────────────────────────────────────── */
+.check-grupo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.check-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: #aaa;
+}
+
+.check-label input[type="checkbox"] { display: none; }
+
+.check-custom {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid #3a3a3a;
+  flex-shrink: 0;
+  position: relative;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.check-label input[type="checkbox"]:checked + .check-custom {
+  background: #c9a84c;
+  border-color: #c9a84c;
+}
+.check-label input[type="checkbox"]:checked + .check-custom::after {
+  content: '';
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 5px; height: 9px;
+  border: 2px solid #111;
+  border-top: none; border-left: none;
+  transform: rotate(45deg);
+}
+
+/* ── Submit ─────────────────────────────────────────────── */
+.btn-submit {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.85rem;
+  background: #c9a84c;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover:not(:disabled) { opacity: 0.88; transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.35; cursor: default; }
+
+/* ── Éxito ──────────────────────────────────────────────── */
+.pantalla-exito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  gap: 1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.exito-icono {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 2px solid #c9a84c;
+  color: #c9a84c;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pantalla-exito h2 { font-size: 1.4rem; color: #f0ece4; margin: 0; }
+.pantalla-exito p  { font-size: 0.88rem; color: #555; margin: 0; }
+.pantalla-exito .btn-submit { max-width: 260px; }

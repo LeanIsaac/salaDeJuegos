@@ -1,0 +1,119 @@
+@if (!enviado()) {
+  <div class="pagina">
+    <h1 class="titulo">Encuesta</h1>
+    <p class="subtitulo">Contanos tu experiencia con la plataforma</p>
+
+    <form [formGroup]="encuestaForm" (ngSubmit)="enviar()" novalidate>
+
+      <!-- Datos personales-->
+      <fieldset class="seccion">
+        <legend class="seccion-titulo">Datos personales</legend>
+
+        <div class="fila-2">
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" formControlName="nombre" placeholder="Ej: Juan" />
+            @if (errorMsg('nombre')) { <span class="error">{{ errorMsg('nombre') }}</span> }
+          </div>
+          <div class="campo">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" formControlName="apellido" placeholder="Ej: Pérez" />
+            @if (errorMsg('apellido')) { <span class="error">{{ errorMsg('apellido') }}</span> }
+          </div>
+        </div>
+
+        <div class="fila-2">
+          <div class="campo">
+            <label for="edad">Edad</label>
+            <input type="number" id="edad" formControlName="edad" placeholder="18 - 99" />
+            @if (errorMsg('edad')) { <span class="error">{{ errorMsg('edad') }}</span> }
+          </div>
+          <div class="campo">
+            <label for="numeroDeTelefono">Teléfono</label>
+            <input type="text" id="numeroDeTelefono" formControlName="numeroDeTelefono" placeholder="Ej: 1123456789" maxlength="10" />
+            @if (errorMsg('numeroDeTelefono')) { <span class="error">{{ errorMsg('numeroDeTelefono') }}</span> }
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ── Pregunta 1: radio-->
+      <fieldset class="seccion">
+        <legend class="seccion-titulo">1. ¿Te gustó la página?</legend>
+        <div class="radio-grupo">
+          <label class="radio-label">
+            <input type="radio" formControlName="pregunta1" value="Si" />
+            <span class="radio-custom"></span>
+            Sí
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="pregunta1" value="No" />
+            <span class="radio-custom"></span>
+            No
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="pregunta1" value="Tal vez" />
+            <span class="radio-custom"></span>
+            Tal vez
+          </label>
+        </div>
+        @if (c('pregunta1').touched && c('pregunta1').invalid) {
+          <span class="error">Seleccioná una opción.</span>
+        }
+      </fieldset>
+
+      <!-- Pregunta 2: checkboxes -->
+      <fieldset class="seccion" formGroupName="pregunta2">
+        <legend class="seccion-titulo">2. ¿Cuáles juegos te gustaron? (al menos uno)</legend>
+        <div class="check-grupo">
+          <label class="check-label">
+            <input type="checkbox" formControlName="blackjack" />
+            <span class="check-custom"></span>
+            Blackjack
+          </label>
+          <label class="check-label">
+            <input type="checkbox" formControlName="ahorcado" />
+            <span class="check-custom"></span>
+            Ahorcado
+          </label>
+          <label class="check-label">
+            <input type="checkbox" formControlName="preguntados" />
+            <span class="check-custom"></span>
+            Preguntados
+          </label>
+          <label class="check-label">
+            <input type="checkbox" formControlName="mayorMenor" />
+            <span class="check-custom"></span>
+            Mayor o Menor
+          </label>
+        </div>
+        @if (encuestaForm.get('pregunta2')!.touched && encuestaForm.get('pregunta2')!.errors?.['ningunoSeleccionado']) {
+          <span class="error">Seleccioná al menos un juego.</span>
+        }
+      </fieldset>
+
+      <!-- Pregunta 3: textarea -->
+      <fieldset class="seccion">
+        <legend class="seccion-titulo">3. ¿Qué mejorarías de la página?</legend>
+        <div class="campo">
+          <textarea formControlName="pregunta3" rows="4" placeholder="Contanos tu idea..."></textarea>
+          @if (errorMsg('pregunta3')) { <span class="error">{{ errorMsg('pregunta3') }}</span> }
+        </div>
+      </fieldset>
+
+      <button type="submit" class="btn-submit" [disabled]="enviando()">
+        @if (enviando()) { Enviando... } @else { Enviar encuesta }
+      </button>
+
+    </form>
+  </div>
+}
+
+<!-- Pantalla de éxito -->
+@if (enviado()) {
+  <div class="pantalla-exito">
+    <div class="exito-icono">✓</div>
+    <h2>¡Gracias por participar!</h2>
+    <p>Tu encuesta fue enviada correctamente.</p>
+    <button class="btn-submit" (click)="volver()">Volver al inicio</button>
+  </div>
+}

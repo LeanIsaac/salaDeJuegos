@@ -159,6 +159,10 @@ export class AuthService {
   return (data as any[]) as ResultadoJuego[];
 }
 
+esAdmin(): boolean {
+  return this.usuarioActual()?.app_metadata?.['role'] === 'admin';
+}
+
   private mostrarAlertaError(titulo: string, mensaje: string) {
     Swal.fire({
       title: titulo,
