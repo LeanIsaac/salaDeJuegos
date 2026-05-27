@@ -1,1 +1,45 @@
-<p>resultados works!</p>
+<div class="pagina">
+
+  <h1 class="titulo">Resultados</h1>
+
+  @if (cargando()) {
+    <div class="cargando">
+      <div class="spinner"></div>
+      <span>Cargando resultados...</span>
+    </div>
+  } @else {
+    <div class="grilla">
+      @for (juego of juegos; track juego.key) {
+        <div class="tabla-card">
+
+          <h2 class="tabla-titulo">{{ juego.label }}</h2>
+
+          @if (getFilas(juego.key).length === 0) {
+            <p class="vacio">Sin partidas registradas</p>
+          } @else {
+            <table>
+              <thead>
+                <tr>
+                  <th class="col-rank">#</th>
+                  <th>Jugador</th>
+                  <th class="col-pts">Puntos</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (fila of getFilas(juego.key); track fila.nombre; let i = $index) {
+                  <tr [class.podio]="i < 3">
+                    <td class="col-rank rank-{{ i + 1 }}">{{ i + 1 }}</td>
+                    <td class="nombre">{{ fila.nombre }}</td>
+                    <td class="col-pts puntos">{{ fila.puntaje }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+
+        </div>
+      }
+    </div>
+  }
+
+</div>
