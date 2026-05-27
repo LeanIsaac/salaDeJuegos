@@ -135,6 +135,30 @@ export class AuthService {
     }
   }
 
+  async traerPuntajes(): Promise<ResultadoJuego[]> {
+  const { data, error } = await this.supabase
+    .from('resultados_juegos')
+    .select(`
+      id,
+      juego,
+      puntaje,
+      created_at,
+      id_usuario,
+      usuarios (
+        nombre,
+        apellido
+      )
+    `)
+    .order('puntaje', { ascending: false });
+
+  if (error) {
+    console.error('Error al traer puntajes:', error.message);
+    return [];
+  }
+
+  return (data as any[]) as ResultadoJuego[];
+}
+
   private mostrarAlertaError(titulo: string, mensaje: string) {
     Swal.fire({
       title: titulo,
@@ -164,4 +188,16 @@ export class AuthService {
     });
   }
 
+}
+
+export interface ResultadoJuego {
+  id: number;
+  juego: string;
+  puntaje: number;
+  created_at: string;
+  id_usuario: string;
+  usuarios: {
+    nombre: string;
+    apellido: string;
+  };
 }

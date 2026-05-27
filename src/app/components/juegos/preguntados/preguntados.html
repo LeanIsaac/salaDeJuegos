@@ -1,1 +1,119 @@
-<p>preguntados works!</p>
+<!-- PANTALLA DE INICIO -->
+@if (preguntadosService.estadoJuego() === 'inicio') {
+  <div class="pantalla inicio">
+    <div class="logo-container">
+      <h1 class="titulo-juego">PREGUNTADOS</h1>
+      <p class="subtitulo">Edición Attack on Titan </p>
+    </div>
+    <p class="descripcion">
+      Se mostrarán {{ totalPreguntas }} imágenes de personajes.<br>
+      ¡Elegí el nombre correcto y acumulá puntos!
+    </p>
+    <button class="btn-principal" (click)="empezar()">
+      Empezar partida
+    </button>
+  </div>
+}
+
+<!-- CARGANDO -->
+@if (preguntadosService.cargando()) {
+  <div class="pantalla cargando">
+    <div class="spinner"></div>
+    <p>Cargando personajes...</p>
+  </div>
+}
+
+<!-- JUGANDO / RESPONDIDA -->
+@if (
+  !preguntadosService.cargando() &&
+  (preguntadosService.estadoJuego() === 'jugando' || preguntadosService.estadoJuego() === 'respondida')
+) {
+  <div class="pantalla juego">
+    <!-- Header -->
+    <div class="header-juego">
+      <span class="contador">
+        Pregunta {{ numeroPreguntaActual }} / {{ totalPreguntas }}
+      </span>
+      <span class="puntaje">
+        ⭐ {{ preguntadosService.puntaje() }} pts
+      </span>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="barra-progreso">
+      <div
+        class="barra-relleno"
+        [style.width.%]="(numeroPreguntaActual / totalPreguntas) * 100"
+      ></div>
+    </div>
+
+    <!-- Pregunta -->
+    <h2 class="pregunta-texto">
+      ¿A qué personaje pertenece esta imagen?
+    </h2>
+
+    <!-- Imagen -->
+    @if (preguntadosService.preguntaActual()) {
+      <div class="imagen-container">
+        <img
+          [src]="preguntadosService.preguntaActual()!.personaje.img"
+          [alt]="preguntadosService.estadoJuego() === 'respondida' ? preguntadosService.preguntaActual()!.correcta : 'Personaje misterioso'"
+          class="imagen-personaje"
+          title="Personaje misterioso"
+        />
+      </div>
+
+      <!-- Feedback -->
+      @if (preguntadosService.estadoJuego() === 'respondida') {
+        <div class="feedback" [class.correcto]="preguntadosService.ultimaRespuestaCorrecta()" [class.incorrecto]="!preguntadosService.ultimaRespuestaCorrecta()">
+          @if (preguntadosService.ultimaRespuestaCorrecta()) {
+            ✅ ¡Correcto! Es <strong>{{ preguntadosService.preguntaActual()!.correcta }}</strong>
+          } @else {
+            ❌ Incorrecto. Era <strong>{{ preguntadosService.preguntaActual()!.correcta }}</strong>
+          }
+        </div>
+      }
+
+      <!-- Opciones -->
+      <div class="opciones">
+        @for (opcion of preguntadosService.preguntaActual()!.opciones; track opcion) {
+          <button
+            class="btn-opcion"
+            [class]="'btn-opcion ' + getClaseBoton(opcion)"
+            [disabled]="preguntadosService.estadoJuego() === 'respondida'"
+            (click)="responder(opcion)"
+          >
+            {{ opcion }}
+          </button>
+        }
+      </div>
+
+      <!-- Botón siguiente -->
+      @if (preguntadosService.estadoJuego() === 'respondida') {
+        <button class="btn-siguiente" (click)="siguiente()">
+          @if (preguntadosService.esUltimaPregunta()) {
+            Ver resultado 🏆
+          } @else {
+            Siguiente pregunta →
+          }
+        </button>
+      }
+    }
+  </div>
+}
+
+<!-- PANTALLA FINAL -->
+@if (preguntadosService.estadoJuego() === 'finalizado') {
+  <div class="pantalla final">
+    <h2 class="resultado-titulo">¡Juego terminado!</h2>
+    <div class="puntaje-final">
+      <span class="numero-puntaje">{{ preguntadosService.puntaje() }}</span>
+      <span class="de-total">/ {{ totalPreguntas }}</span>
+    </div>
+
+    <button class="btn-principal" (click)="empezar()">
+      🔄 Jugar de nuevo
+    </button>
+  </div>
+}
+

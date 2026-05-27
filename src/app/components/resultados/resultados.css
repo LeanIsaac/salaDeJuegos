@@ -1,0 +1,139 @@
+:host {
+  display: block;
+}
+
+.pagina {
+  padding: 2rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.titulo {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+  color: #f0ece4;
+  letter-spacing: 0.03em;
+}
+
+/* ── Grilla de 4 tablas ─────────────────────────────────── */
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── Card de cada tabla ─────────────────────────────────── */
+.tabla-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.tabla-titulo {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0 0 1rem;
+}
+
+/* ── Tabla ──────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+thead tr {
+  border-bottom: 1px solid #2a2a2a;
+}
+
+th {
+  padding: 0 0 8px;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #555;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+tbody tr {
+  border-bottom: 1px solid #1f1f1f;
+  transition: background 0.15s;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+td {
+  padding: 10px 0;
+  color: #ccc;
+}
+
+/* ── Columnas ───────────────────────────────────────────── */
+.col-rank {
+  width: 28px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #444;
+}
+
+.col-pts {
+  text-align: right;
+}
+
+.nombre {
+  font-weight: 500;
+  color: #e8e4dc;
+}
+
+.puntos {
+  font-weight: 600;
+  color: #c9a84c;
+}
+
+/* ── Top 3 ──────────────────────────────────────────────── */
+.rank-1 { color: #c9a84c; font-weight: 700; }
+.rank-2 { color: #aaa;    font-weight: 600; }
+.rank-3 { color: #8a6a3a; font-weight: 600; }
+
+/* ── Estado vacío ───────────────────────────────────────── */
+.vacio {
+  font-size: 0.82rem;
+  color: #444;
+  margin: 0.5rem 0 0;
+  font-style: italic;
+}
+
+/* ── Cargando ───────────────────────────────────────────── */
+.cargando {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #555;
+  font-size: 0.9rem;
+  padding: 2rem 0;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-top-color: #c9a84c;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

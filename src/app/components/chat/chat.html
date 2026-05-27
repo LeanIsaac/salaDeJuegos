@@ -6,7 +6,7 @@
     <div class="online-dot"></div>
   </div>
 
-  <div class="chat-body">
+  <div class="chat-body" #mensajesContainer>
     @for (msg of chatService.mensajes(); track msg.id) {
       <div class="mensaje" [class.yo]="esElUsuarioActual(msg)" [class.otros]="!esElUsuarioActual(msg)">
         <div class="meta">

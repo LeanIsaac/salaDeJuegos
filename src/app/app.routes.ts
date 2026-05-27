@@ -9,7 +9,6 @@ export const routes: Routes = [
   { path: 'registro', loadComponent: () => import('./components/registro/registro').then(archivo => archivo.Registro) },
   { path: 'quienSoy', loadComponent: () => import('./components/quien-soy/quien-soy').then(archivo => archivo.QuienSoy) },
   { path: 'chat', loadComponent: () => import('./components/chat/chat').then(archivo => archivo.Chat) },
-
   {
     path: 'juegos',
     canActivate: [authGuard],
@@ -32,7 +31,11 @@ export const routes: Routes = [
       }
     ]
   },
-
-  { path: '**', redirectTo: 'home' },
+  {
+    path: 'resultados',
+    canActivate: [authGuard],
+    loadComponent: () => import('./components/resultados/resultados').then(archivo => archivo.Resultados)
+  },
+  { path: '**', redirectTo: 'home' }
 
 ];
