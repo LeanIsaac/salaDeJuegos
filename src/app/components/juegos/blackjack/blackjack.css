@@ -1,0 +1,386 @@
+/* ── Variables ─────────────────────────────────────────────── */
+:host {
+  --verde-mesa:    #1a3a2a;
+  --verde-borde:   #2d5c40;
+  --verde-claro:   #234d36;
+  --dorado:        #c9a84c;
+  --dorado-claro:  #e8c870;
+  --crema:         #f5f0e8;
+  --rojo-carta:    #c0392b;
+  --negro-carta:   #1a1a1a;
+  --fondo:         #0f1e17;
+  --texto-muted:   rgba(245,240,232,0.5);
+  --radio-carta:   6px;
+
+  display: block;
+  background: var(--fondo);
+  min-height: 100vh;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: var(--crema);
+}
+
+/* ── Pantalla genérica ──────────────────────────────────────── */
+.pantalla {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+}
+
+/* ── INICIO ─────────────────────────────────────────────────── */
+.inicio {
+  justify-content: center;
+  gap: 2.5rem;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(45, 92, 64, 0.4) 0%, transparent 70%),
+    var(--fondo);
+}
+
+.logo-wrap {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.logo-suit {
+  font-size: 3rem;
+  color: var(--dorado);
+  line-height: 1;
+  filter: drop-shadow(0 0 12px rgba(201,168,76,0.4));
+}
+
+.logo-titulo {
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--dorado);
+  margin: 0;
+  text-shadow: 0 2px 20px rgba(201,168,76,0.3);
+}
+
+.logo-sub {
+  font-size: 0.9rem;
+  letter-spacing: 0.4em;
+  color: var(--texto-muted);
+  margin: 0;
+  text-transform: uppercase;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.reglas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.regla-item {
+  background: rgba(45, 92, 64, 0.25);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.regla-icono { font-size: 1.2rem; }
+
+.regla-texto {
+  font-size: 0.8rem;
+  color: var(--texto-muted);
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.3;
+}
+
+/* ── Botones ─────────────────────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, var(--dorado), var(--dorado-claro));
+  color: var(--negro-carta);
+  border: none;
+  padding: 0.9rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 0.08em;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover  { opacity: 0.9; transform: translateY(-2px); }
+.btn-primary:active { transform: translateY(0); }
+
+/* ── JUEGO ───────────────────────────────────────────────────── */
+.juego {
+  gap: 0;
+  justify-content: space-between;
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+/* Stats bar */
+.stats-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  margin-bottom: 0.5rem;
+}
+
+.stat { display: flex; flex-direction: column; align-items: flex-start; }
+.stat-center { align-items: center; }
+.stat-right  { align-items: flex-end; }
+
+.stat-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--texto-muted);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.stat-valor {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--crema);
+  line-height: 1.2;
+}
+
+.stat-valor.dorado { color: var(--dorado); }
+
+/* Mesa */
+.mesa {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  max-width: 500px;
+  background:
+    radial-gradient(ellipse at 50% 50%, var(--verde-claro) 0%, var(--verde-mesa) 60%),
+    var(--verde-mesa);
+  border: 2px solid var(--verde-borde);
+  border-radius: 24px;
+  padding: 1.5rem 1.25rem;
+  min-height: 380px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.4), 0 0 0 6px rgba(45,92,64,0.3);
+}
+
+/* Zona de cartas */
+.zona { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.zona-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.zona-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.45);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.puntaje-badge {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dorado);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.puntaje-badge.pasado { color: #e74c3c; }
+
+/* Fila de cartas */
+.cartas-fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 96px;
+  align-items: flex-start;
+}
+
+/* Carta */
+.carta {
+  width: 62px;
+  height: 90px;
+  background: var(--crema);
+  border-radius: var(--radio-carta);
+  border: 1px solid rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--negro-carta);
+  box-shadow: 1px 2px 6px rgba(0,0,0,0.4);
+  animation: deal 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  flex-shrink: 0;
+}
+
+/* Animación de reparto */
+@keyframes deal {
+  from { opacity: 0; transform: translateY(-16px) scale(0.85) rotate(-6deg); }
+  to   { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+}
+
+.carta.roja { color: var(--rojo-carta); }
+
+.carta.oculta {
+  background: #1e4d6b;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  color: transparent;
+}
+
+.carta-valor-top {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.carta-valor-bot {
+  position: absolute;
+  bottom: 4px;
+  right: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: rotate(180deg);
+}
+
+.carta-palo {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.carta-dorso {
+  font-size: 3.5rem;
+  color: rgba(255,255,255,0.15);
+}
+
+/* Divisor */
+.divisor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+
+.divisor-linea {
+  flex: 1;
+  height: 1px;
+  background: rgba(201,168,76,0.25);
+}
+
+.divisor-texto {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+  font-family: 'Segoe UI', sans-serif;
+  white-space: nowrap;
+}
+
+@keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+.anim-pulse { animation: pulse 1.2s ease infinite; }
+
+/* Resultado badge */
+.resultado-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 4px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Animación de pop in */
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.res-blackjack { background: rgba(201,168,76,0.3); color: var(--dorado-claro); border: 1px solid var(--dorado); }
+.res-victoria  { background: rgba(39,174,96,0.3);  color: #5dde95; border: 1px solid #2ecc71; }
+.res-derrota   { background: rgba(192,57,43,0.3);  color: #ff6b6b; border: 1px solid #e74c3c; }
+.res-empate    { background: rgba(149,165,166,0.3); color: #bdc3c7; border: 1px solid #95a5a6; }
+
+/* Acciones */
+.acciones {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 1rem;
+}
+
+.btn-accion {
+  flex: 1;
+  border: 1.5px solid;
+  padding: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 0.05em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  text-transform: uppercase;
+}
+
+.btn-pedir {
+  background: rgba(201,168,76,0.15);
+  border-color: var(--dorado);
+  color: var(--dorado-claro);
+}
+
+.btn-pedir:hover  { background: rgba(201,168,76,0.28); transform: translateY(-1px); }
+.btn-pedir:active { transform: translateY(0); }
+
+.btn-plantar {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(245,240,232,0.3);
+  color: var(--crema);
+}
+
+.btn-plantar:hover  { background: rgba(255,255,255,0.12); transform: translateY(-1px); }
+.btn-plantar:active { transform: translateY(0); }
+
+.acciones .btn-primary { flex: 1; }
+
+.esperando {
+  flex: 1;
+  text-align: center;
+  color: var(--texto-muted);
+  font-size: 0.85rem;
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.9rem;
+  animation: pulse 1.2s ease infinite;
+}

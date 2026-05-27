@@ -1,1 +1,143 @@
-<p>blackjack works!</p>
+<!-- PANTALLA INICIO -->
+@if (bj.estado() === 'inicio') {
+  <div class="pantalla inicio">
+    <div class="logo-wrap">
+      <div class="logo-suit">♠</div>
+      <h1 class="logo-titulo">BLACKJACK</h1>
+      <p class="logo-sub">21 — Versión Rápida</p>
+    </div>
+
+    <div class="reglas-grid">
+      <div class="regla-item">
+        <span class="regla-icono">🂡</span>
+        <span class="regla-texto">As vale 11 (o 1)</span>
+      </div>
+      <div class="regla-item">
+        <span class="regla-icono">👑</span>
+        <span class="regla-texto">J, Q, K valen 10</span>
+      </div>
+      <div class="regla-item">
+        <span class="regla-icono">🎯</span>
+        <span class="regla-texto">Dealer pide hasta 17</span>
+      </div>
+      <div class="regla-item">
+        <span class="regla-icono">🏆</span>
+        <span class="regla-texto">Acercate a 21 sin pasarte</span>
+      </div>
+    </div>
+
+    <button class="btn-primary" (click)="bj.iniciarPartida()">
+      Repartir cartas
+    </button>
+  </div>
+}
+
+<!-- PANTALLA DE JUEGO -->
+@if (bj.estado() !== 'inicio') {
+  <div class="pantalla juego">
+
+    <!-- Stats bar -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-label">Partidas</span>
+        <span class="stat-valor">{{ bj.partidas() }}</span>
+      </div>
+      <div class="stat stat-center">
+        <span class="stat-label">Victorias</span>
+        <span class="stat-valor">{{ bj.victorias() }}</span>
+      </div>
+      <div class="stat stat-right">
+        <span class="stat-label">Puntos</span>
+        <span class="stat-valor dorado">{{ bj.puntaje() }}</span>
+      </div>
+    </div>
+
+    <!-- Mesa -->
+    <div class="mesa">
+
+      <!-- Zona dealer -->
+      <div class="zona">
+        <div class="zona-header">
+          <span class="zona-label">Dealer</span>
+          <span class="puntaje-badge">
+            {{ bj.estado() === 'jugando' ? bj.puntajeDealerVisible() : bj.puntajeDealer() }}
+          </span>
+        </div>
+        <div class="cartas-fila">
+          @for (carta of bj.manoDealer(); track trackCarta($index, carta)) {
+            <div class="carta" [class.roja]="esRoja(carta)" [class.oculta]="carta.oculta">
+              @if (!carta.oculta) {
+                <span class="carta-valor-top">{{ carta.valor }}</span>
+                <span class="carta-palo">{{ carta.palo }}</span>
+                <span class="carta-valor-bot">{{ carta.valor }}</span>
+              } @else {
+                <span class="carta-dorso">🂠</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Divisor -->
+      <div class="divisor">
+        <div class="divisor-linea"></div>
+        @if (bj.estado() === 'dealer') {
+          <span class="divisor-texto anim-pulse">Dealer jugando…</span>
+        } @else if (bj.estado() === 'finalizado') {
+          <div class="resultado-badge {{ claseResultado }}">
+            {{ mensajeResultado }}
+          </div>
+        } @else {
+          <span class="divisor-texto">Tu turno</span>
+        }
+        <div class="divisor-linea"></div>
+      </div>
+
+      <!-- Zona jugador -->
+      <div class="zona">
+        <div class="zona-header">
+          <span class="zona-label">Tú</span>
+          <span class="puntaje-badge" [class.pasado]="bj.puntajeJugador() > 21">
+            {{ bj.puntajeJugador() }}
+          </span>
+        </div>
+        <div class="cartas-fila">
+          @for (carta of bj.manoJugador(); track trackCarta($index, carta)) {
+            <div class="carta nueva" [class.roja]="esRoja(carta)">
+              <span class="carta-valor-top">{{ carta.valor }}</span>
+              <span class="carta-palo">{{ carta.palo }}</span>
+              <span class="carta-valor-bot">{{ carta.valor }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div><!-- /mesa -->
+
+    <!-- Acciones -->
+    <div class="acciones">
+      @if (bj.estado() === 'jugando') {
+        <button class="btn-accion btn-pedir" (click)="bj.pedirCarta()">
+          + Pedir carta
+        </button>
+        <button class="btn-accion btn-plantar" (click)="bj.plantarse()">
+          Plantarse
+        </button>
+      }
+
+      @if (bj.estado() === 'finalizado') {
+        <button class="btn-primary" (click)="bj.iniciarPartida()">
+          Nueva mano
+        </button>
+        <button class="btn-accion btn-plantar" (click)="salir()">
+          Salir
+        </button>
+      }
+
+      @if (bj.estado() === 'dealer') {
+        <div class="esperando">Esperando al dealer…</div>
+      }
+    </div>
+
+  </div>
+}
